@@ -26,3 +26,7 @@ Route::get('/kirim-pesan', function () {
 
 Route::resource('beli', BeliController::class);
 
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+

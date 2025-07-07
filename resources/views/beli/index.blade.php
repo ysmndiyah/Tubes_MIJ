@@ -249,11 +249,16 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h2>Daftar Pesanan</h2>
+    <div class="header">
+        <h2>Daftar Pesanan</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <a href="{{ route('home') }}" class="add-btn" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);">
+                🏠 Kembali ke Beranda
+            </a>
             <a href="{{ route('beli.create') }}" class="add-btn">Tambah Pesanan</a>
         </div>
+    </div>
+    
 
         @if(session('success'))
             <div class="success-message">
