@@ -44,7 +44,17 @@
     
 
     <div class="navbar-extra">
-      <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+      @guest
+    <a href="{{ route('login') }}" class="btn-login">Login</a>
+    <a href="{{ route('register') }}" class="btn-register">Register</a>
+@else
+    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn-logout">
+        Logout
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+@endguest
     </div>
   </nav>
   <!-- Navbar end -->

@@ -31,6 +31,10 @@
         <textarea id="pesan" name="pesan" rows="5" cols="30" required></textarea><br><br>
 
         <button type="submit">Kirim via WhatsApp</button>
+        <a href="{{ route('home') }}">
+            <button type="button">Kembali ke Beranda</button>
+        </a>
+        
     </form>
 </body>
 </html>
