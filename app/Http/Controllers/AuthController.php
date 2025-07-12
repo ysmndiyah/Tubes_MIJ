@@ -14,10 +14,10 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function showRegisterForm()
-    {
-        return view('auth.register');
-    }
+    //public function showRegisterForm()
+    //{
+        //return view('auth.register');
+    //}
 
     public function register(Request $request)
 {
@@ -31,7 +31,7 @@ class AuthController extends Controller
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
-        'role' => 'user', // atau 'admin'
+        'role' => 'admin', // atau 'admin'
     ]);
 
     auth()->login($user);
@@ -54,11 +54,15 @@ public function login(Request $request)
 
         $user = Auth::user();
 
-        // ⬇️ Letakkan redirect sesuai role di sini juga
+        // Hanya izinkan admin
         if ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         } else {
-            return redirect()->route('user.dashboard');
+            // Logout dan tolak akses
+            Auth::logout();
+            return back()->withErrors([
+                'email' => 'Hanya admin yang diperbolehkan login.',
+            ]);
         }
     }
 
@@ -66,14 +70,14 @@ public function login(Request $request)
         'email' => 'Email atau password salah.',
     ]);
 }
+public function logout(Request $request)
+{
+    Auth::logout();
 
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
 
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+    return redirect('/login')->with('success', 'Berhasil logout.');
+}
 
-        return redirect('/');
-    }
 }

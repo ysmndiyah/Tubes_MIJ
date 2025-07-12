@@ -18,9 +18,12 @@
 
     <button type="submit" class="btn-login">Login</button>
 
-    <p style="margin-top: 15px;">
-      Belum punya akun? <a href="{{ route('register') }}" class="form-link">Daftar di sini</a>
-    </p>
+    {{-- 
+<p style="margin-top: 15px;">
+  Belum punya akun? <a href="{{ route('register') }}" class="form-link">Daftar di sini</a>
+</p>
+--}}
+    
   </form>
 </div>
 @endsection

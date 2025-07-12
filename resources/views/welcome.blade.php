@@ -46,7 +46,7 @@
     <div class="navbar-extra">
       @guest
     <a href="{{ route('login') }}" class="btn-login">Login</a>
-    <a href="{{ route('register') }}" class="btn-register">Register</a>
+   
 @else
     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn-logout">
         Logout

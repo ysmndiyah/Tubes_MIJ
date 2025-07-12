@@ -21,7 +21,7 @@
     </script>
 </head>
 <body>
-    <h1>Form Pemesanan Produk MIJ</h1>
+    <h1>Form Chat Admin MIJ</h1>
 
     <form onsubmit="kirimKeWA(event)">
         <label for="nama">Nama:</label><br>
