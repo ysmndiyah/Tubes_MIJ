@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BeliController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\LandingPageController;
+
 
 // Landing page
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [LandingPageController::class, 'index'])->name('home');
 
 // Form kirim pesan
 Route::get('/kirim-pesan', function () {
@@ -44,12 +44,11 @@ Route::middleware(['auth', 'checkRole:admin'])->group(function () {
     ]);
 });
 
+    
 
-//Route::middleware(['auth', 'checkRole:user'])->group(function () {
-    //Route::get('/dashboard/user', function () {
-        //return view('dashboard.user');
-    //})->name('user.dashboard');
-//});
+
+
+
 
 
 

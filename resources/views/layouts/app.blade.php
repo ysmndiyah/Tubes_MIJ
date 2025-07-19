@@ -26,6 +26,13 @@
             <a href="#team">Tim Kami</a>
             <a href="#products">Produk</a>
             <a href="#contact">Kontak</a>
+
+            @auth
+            @if (auth()->user()->role === 'admin')
+                <a href="{{ route('produk.index') }}">Kelola Produk</a>
+            @endif
+        @endauth
+        
         </div>
     </nav>
 

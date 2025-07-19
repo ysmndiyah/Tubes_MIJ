@@ -108,28 +108,29 @@
     <h2><span>Our Best</span> Seller</h2>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo unde eum, ab fuga possimus iste.</p>
 
-    <div class="row">
-      <div class="product-card">
-        <div class="product-icons">
-          <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
+    <div class="row product-grid">
+      @forelse ($produk as $item)
+        <div class="product-card">
+          <div class="product-image">
+            <img src="{{ asset('uploads/' . $item->gambar) }}" alt="{{ $item->nama }}" />
+          </div>
+          <div class="product-content">
+            <h3>{{ $item->nama }}</h3>
+            <div class="product-stars">
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star"></i>
+            </div>
+            <div class="product-price">Rp {{ number_format($item->harga, 0, ',', '.') }}</div>
+            <a href="#" class="btn" style="margin-top: 1rem; display: inline-block;">Beli Sekarang</a>
+          </div>
         </div>
-        <div class="product-image">
-          <img src="image/es balok3.jpg" alt="Product 1" />
-        </div>
-        <div class="product-content">
-        <h3>Es Balok</h3>
-        <div class="product-stars">
-        <i data-feather="star" class="star-full"></i>
-        <i data-feather="star" class="star-full"></i>
-        <i data-feather="star" class="star-full"></i>
-        <i data-feather="star" class="star-full"></i>
-        <i data-feather="star"></i>
-        </div>
-        <div class="product-price">Rp 15.000<span>Rp 25.000</span></div>
-        <a href="beli" class="btn" style="margin-top: 1rem; display: inline-block;">Beli Sekarang</a>
-        
-      </div>
-
+      @empty
+        <p style="color: white;">Belum ada produk tersedia.</p>
+      @endforelse
+    </div>
       </div>
     </div>
   </section>
