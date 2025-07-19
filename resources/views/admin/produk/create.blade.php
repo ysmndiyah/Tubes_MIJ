@@ -4,7 +4,7 @@
 <div class="container">
     <h2 style="color: #2F5597;">Tambah Produk</h2>
 
-    <form action="{{ route('produk.store') }}" method="POST">
+    <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="nama" class="form-label">Nama Produk</label>
@@ -17,13 +17,18 @@
         </div>
 
         <div class="mb-3">
-            <label for="stok" class="form-label">Stok</label>
+            <label for="stok" class="form-label">Stok (Kg)</label>
             <input type="number" name="stok" class="form-control" required>
         </div>
 
         <div class="mb-3">
-            <label for="harga" class="form-label">Harga (Rp)</label>
+            <label for="harga" class="form-label">Harga (Rp/kg)</label>
             <input type="number" name="harga" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+             <label for="gambar" class="form-label">Gambar Produk</label>
+             <input type="file" name="gambar" class="form-control" accept="image/*">
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>

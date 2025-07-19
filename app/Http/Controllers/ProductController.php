@@ -25,14 +25,19 @@ class ProductController extends Controller
             'deskripsi' => 'nullable',
             'stok' => 'required|integer|min:0',
             'harga' => 'required|numeric|min:0',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
         ]);
+
+        $data = $request->only(['nama', 'deskripsi', 'stok', 'harga']);
+
+        if ($request->hasFile('gambar')) {
+            $gambar = $request->file('gambar');
+            $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
+            $gambar->move(public_path('uploads'), $namaFile);
+            $data['gambar'] = $namaFile;
+        }
     
-        Product::create([
-            'nama' => $request->nama,
-            'deskripsi' => $request->deskripsi,
-            'stok' => $request->stok,
-            'harga' => $request->harga,
-        ]);
+        Product::create($data);
     
         return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
     }
@@ -51,17 +56,26 @@ public function update(Request $request, $id)
         'deskripsi' => 'nullable',
         'stok' => 'required|integer|min:0',
         'harga' => 'required|numeric|min:0',
+        'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:204'
     ]);
 
     $produk = Product::findOrFail($id);
+    $data = $request->only(['nama', 'deskripsi', 'stok', 'harga']);
 
-    $produk->update([
-        'nama' => $request->nama,
-        'deskripsi' => $request->deskripsi,
-        'stok' => $request->stok,
-        'harga' => $request->harga,
-    ]);
+    if ($request->hasFile('gambar')) {
+        // hapus gambar lama jika ada
+        if ($produk->gambar && file_exists(public_path('uploads/' . $produk->gambar))) {
+            unlink(public_path('uploads/' . $produk->gambar));
+        }
 
+        $gambar = $request->file('gambar');
+        $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
+        $gambar->move(public_path('uploads'), $namaFile);
+        $data['gambar'] = $namaFile;
+    }
+
+
+    $produk->update($data);
     return redirect()->route('produk.index')->with('success', 'Produk berhasil diperbarui.');
 }
 
@@ -69,9 +83,16 @@ public function update(Request $request, $id)
 public function destroy($id)
 {
     $produk = Product::findOrFail($id);
+
+    // Hapus gambar dari folder uploads
+    if ($produk->gambar && file_exists(public_path('uploads/' . $produk->gambar))) {
+        unlink(public_path('uploads/' . $produk->gambar));
+    }
+
     $produk->delete();
 
     return redirect()->route('produk.index')->with('success', 'Produk berhasil dihapus.');
 }
+
 
 }

@@ -19,14 +19,19 @@
         </div>
 
         <div class="mb-3">
-            <label for="stok" class="form-label">Stok</label>
+            <label for="stok" class="form-label">Stok (Kg)</label>
             <input type="number" name="stok" class="form-control" value="{{ $produk->stok }}" required>
         </div>
 
         <div class="mb-3">
-            <label for="harga" class="form-label">Harga (Rp)</label>
+            <label for="harga" class="form-label">Harga (Rp/Kg)</label>
             <input type="number" name="harga" class="form-control" value="{{ $produk->harga }}" required>
         </div>
+
+        <div class="mb-3">
+            <label for="gambar" class="form-label">Gambar Produk</label>
+            <input type="file" name="gambar" class="form-control" accept="image/*">
+       </div>
 
         <button type="submit" class="btn btn-success">Update</button>
         <a href="{{ route('produk.index') }}" class="btn btn-secondary">Kembali</a>

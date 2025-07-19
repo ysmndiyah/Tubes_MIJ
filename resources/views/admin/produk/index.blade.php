@@ -248,6 +248,15 @@
             flex-direction: column;
             gap: 4px;
         }
+
+        .product-thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
     }
 </style>
 
@@ -285,9 +294,17 @@
                             @forelse($produk as $item)
                                 <tr>
                                     <td>
-                                        <div class="product-name">{{ $item->nama }}</div>
-                                        <div class="product-description">{{ $item->deskripsi }}</div>
+                                        <div style="display: flex; align-items: center; gap: 1rem;">
+                                            @if($item->gambar)
+                                                <img src="{{ asset('uploads/' . $item->gambar) }}" alt="{{ $item->nama }}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px; border: 1px solid #ccc;">
+                                            @endif
+                                            <div>
+                                                <div class="product-name">{{ $item->nama }}</div>
+                                                <div class="product-description">{{ $item->deskripsi }}</div>
+                                            </div>
+                                        </div>
                                     </td>
+
                                     <td>
                                         <span class="stock-badge">{{ $item->stok }} unit</span>
                                     </td>
