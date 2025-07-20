@@ -1064,20 +1064,6 @@ section h2 span {
   margin-top: 2rem;
 }
 
-.product-card {
-  background-color: white;
-  border-radius: 1rem;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  max-width: 300px;
-  width: 100%;
-}
 
-.product-card:hover {
-  transform: translateY(-6px);
-}
-  
   
   
