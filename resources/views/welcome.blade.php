@@ -124,7 +124,8 @@
               <i data-feather="star"></i>
             </div>
             <div class="product-price">Rp {{ number_format($item->harga, 0, ',', '.') }}</div>
-            <a href="#" class="btn" style="margin-top: 1rem; display: inline-block;">Beli Sekarang</a>
+            <a href="javascript:void(0);" 
+               onclick="beliSekarang('{{ $item->nama }}', {{ $item->harga }})" class="btn" style="margin-top: 1rem; display: inline-block;"> Beli Sekarang </a>
           </div>
         </div>
       @empty
@@ -222,8 +223,22 @@
   <ul id="cart-items"></ul>
 </div>
 
+<!-- Modal Beli Sekarang -->
+<div id="beliModal" class="modal-beli">
+  <div class="modal-beli-content">
+    <span class="modal-beli-close">&times;</span>
+    <h3>Masukkan Jumlah Pembelian</h3>
+    <p id="nama-produk"></p>
+    <input type="number" id="jumlahInput" min="1" placeholder="Jumlah" />
+    <button onclick="kirimPesan()">Kirim ke WhatsApp</button>
+  </div>
+</div>
+
+
+
 <!-- My Javascript -->
-<script src="script.js"></script>
+<script src="{{ asset('js/script.js') }}"></script>
+<script src="{{ asset('js/whatsapp.js') }}"></script>
 </body>
 
 </html>
