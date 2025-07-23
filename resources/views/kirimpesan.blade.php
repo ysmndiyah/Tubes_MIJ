@@ -27,7 +27,7 @@
         <label for="nama">Nama:</label><br>
         <input type="text" id="nama" name="nama" required><br><br>
 
-        <label for="pesan">Pesan:</label><br>
+        <label for="pesan">Kritik /Saran:</label><br>
         <textarea id="pesan" name="pesan" rows="5" cols="30" required></textarea><br><br>
 
         <button type="submit">Kirim via WhatsApp</button>
