@@ -1107,6 +1107,20 @@ section h2 span {
   cursor: pointer;
 }
 
+.btn-kelola-produk {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #2F5597;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+.btn-kelola-produk:hover {
+  background-color: #1f3f73;
+}
 
   
   

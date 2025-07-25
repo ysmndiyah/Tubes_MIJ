@@ -42,12 +42,15 @@
       <a href="#contact">Kontak</a>
     </div>
     
-
     <div class="navbar-extra">
       @guest
     <a href="{{ route('login') }}" class="btn-login">Login</a>
-   
 @else
+@if(Auth::user()->role === 'admin')
+      <a href="{{ route('produk.index') }}" class="btn-kelola-produk" title="Kelola Produk">
+        Kelola Produk
+      </a>
+    @endif
     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn-logout">
         Logout
     </a>
