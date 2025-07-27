@@ -18,6 +18,7 @@ return new class extends Migration
         $table->integer('stok');
         $table->decimal('harga', 10, 2);
         $table->timestamps();
+        $table->varchar('gambar', 255);
     });
 }
 
