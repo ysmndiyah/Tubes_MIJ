@@ -66,7 +66,7 @@
   <section class="hero" id="home">
     <div id="slider" class="mask-container">
       <main class="content">
-        <h1 style="text-align: center;">Solusi Ikan Fresh?<br><span>MijIn Aja!</span></h1>
+        <h1 style="text-align: center;">Solusi Ikan Fresh?<br><span>Mij-in Aja!</span></h1>
         <p>CV Mij Hadir Untuk ikan segarmu.</p>
       </main>
     </div>
@@ -119,12 +119,14 @@
           </div>
           <div class="product-content">
             <h3>{{ $item->nama }}</h3>
+            <p class="product-description">{{ $item->deskripsi }}</p>
+            <p class="product-stock">Stok: {{ $item->stok }}</p>
             <div class="product-stars">
               <i data-feather="star" class="star-full"></i>
               <i data-feather="star" class="star-full"></i>
               <i data-feather="star" class="star-full"></i>
               <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
+              <i data-feather="star" class="star-full"></i>
             </div>
             <div class="product-price">Rp {{ number_format($item->harga, 0, ',', '.') }}</div>
             <a href="javascript:void(0);" 
