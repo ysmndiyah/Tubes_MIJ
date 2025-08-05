@@ -66,10 +66,10 @@
   <section class="hero" id="home">
     <div id="slider" class="mask-container">
       <main class="content">
-        <h1 style="text-align: center;">Solusi Ikan Fresh?<br><span>Mij-in Aja!</span></h1>
+        <h1 style="text-align: center;">Solusi Ikan Fresh?<br><span><span style="color: #2F5597;">Mij</span>-in Aja!</span></h1>
         <p>CV Mij Hadir Untuk ikan segarmu.</p>
       </main>
-    </div>
+    </div>  
   </section>
   <!-- Hero Section end -->
 
@@ -129,8 +129,18 @@
               <i data-feather="star" class="star-full"></i>
             </div>
             <div class="product-price">Rp {{ number_format($item->harga, 0, ',', '.') }}</div>
-            <a href="javascript:void(0);" 
-               onclick="beliSekarang('{{ $item->nama }}', {{ $item->harga }})" class="btn" style="margin-top: 1rem; display: inline-block;"> Beli Sekarang </a>
+            @if($item->stok > 0)
+            <button type="button" class="btn"
+        onclick="beliSekarang({{ $item->id }}, '{{ $item->nama }}', {{ $item->harga }}, {{ $item->stok }})">
+  Beli Sekarang
+</button>
+@else
+  <button type="button" class="btn"
+          onclick="alert('Maaf, stok {{ $item->nama }} sudah habis!')"
+          style="opacity:0.6;cursor:not-allowed;">Stok Habis</button>
+@endif
+
+
           </div>
         </div>
       @empty
@@ -228,17 +238,21 @@
   <ul id="cart-items"></ul>
 </div>
 
-<!-- Modal Beli Sekarang -->
+<!-- Modal Beli -->
 <div id="beliModal" class="modal-beli">
   <div class="modal-beli-content">
-    <span class="modal-beli-close">&times;</span>
+    <span class="modal-beli-close" onclick="closeModal()">&times;</span>  
     <h3>Masukkan Jumlah Pembelian</h3>
     <p id="nama-produk"></p>
-    <input type="number" id="jumlahInput" min="1" placeholder="Jumlah" />
-    <button onclick="kirimPesan()">Kirim ke WhatsApp</button>
+
+    <form id="formBeli" action="{{ route('beli.store') }}" method="POST">
+      @csrf
+      <input type="hidden" name="produk_id" id="produkIdField">
+      <input type="number" name="jumlah" id="jumlahInput" min="1" required placeholder="Jumlah">
+      <button type="button" class="btn" onclick="cekJumlahDanSubmit()">Pesan Sekarang</button>
+    </form>
   </div>
 </div>
-
 
 
 <!-- My Javascript -->
@@ -246,4 +260,8 @@
 <script src="{{ asset('js/whatsapp.js') }}"></script>
 </body>
 
+
+  
+
 </html>
+

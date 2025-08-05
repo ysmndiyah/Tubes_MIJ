@@ -1,38 +1,34 @@
-function beliSekarang(namaProduk, harga) {
-    selectedProduk = { nama: namaProduk, harga: harga };
-    document.getElementById('nama-produk').innerText = `Produk: ${namaProduk}`;
-    document.getElementById('jumlahInput').value = '';
-    document.getElementById('beliModal').style.display = 'block';
+function beliSekarang(id, nama, harga, stok) {
+  if (stok <= 0) {
+    alert('Maaf, stok ' + nama + ' sudah habis!');
+    return;
   }
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('beliModal');
-    const closeBtn = document.querySelector('.modal-beli-close');
-  
-    closeBtn.onclick = () => {
-      modal.style.display = 'none';
-    };
-  
-    window.onclick = (event) => {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    };
-  });
-  
-  function kirimPesan() {
-    const jumlah = parseInt(document.getElementById('jumlahInput').value);
-    if (!jumlah || jumlah <= 0) {
-      alert('Jumlah tidak valid');
-      return;
-    }
-  
-    const total = jumlah * selectedProduk.harga;
-    const pesan = `Halo! Saya ingin memesan:%0A%0AProduk: ${selectedProduk.nama}%0AJumlah: ${jumlah}%0ATotal: Rp ${total.toLocaleString('id-ID')}`;
-    const noWa = '6282245870175'; // Ganti sesuai kebutuhan
-    const link = `https://wa.me/${noWa}?text=${pesan}`;
-  
-    window.open(link, '_blank');
-    document.getElementById('beliModal').style.display = 'none';
+  document.getElementById('produkIdField').value = id;
+  document.getElementById('nama-produk').innerText = `Produk: ${nama}`;
+  document.getElementById('jumlahInput').value = '';
+  document.getElementById('jumlahInput').setAttribute('max', stok);
+  document.getElementById('beliModal').style.display = 'block';
+}
+
+function closeModal() {
+  document.getElementById('beliModal').style.display = 'none';
+}
+
+window.onclick = function(e) {
+  const modal = document.getElementById('beliModal');
+  if (e.target === modal) {
+    closeModal();
   }
-  
+}
+
+function cekJumlahDanSubmit() {
+  const jumlah = parseInt(document.getElementById('jumlahInput').value);
+  const stok = parseInt(document.getElementById('jumlahInput').getAttribute('max'));
+
+  if (jumlah > stok) {
+    alert('Maaf, stok hanya tersedia ' + stok);
+    return;
+  }
+
+  document.getElementById('formBeli').submit();
+}

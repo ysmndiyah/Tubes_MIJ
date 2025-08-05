@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BeliController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\PageController;
 
 
 // Landing page
@@ -43,6 +44,9 @@ Route::middleware(['auth', 'checkRole:admin'])->group(function () {
         'destroy' => 'produk.destroy',
     ]);
 });
+
+Route::post('/beli-produk', [ProductController::class, 'beli'])->name('produk.beli');
+Route::get('/', [PageController::class, 'index'])->name('home');
 
     
 
